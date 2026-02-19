@@ -1,0 +1,138 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<!doctype html>
+<html lang="ja">
+  <head>
+    <BaseHead title={`${title} — 7/16`} description={description} />
+  </head>
+  <body>
+    <Header />
+    <main class="legal">
+      <div class="legal-container">
+        <slot />
+      </div>
+    </main>
+    <Footer />
+  </body>
+</html>
+
+<style>
+  .legal {
+    background: var(--white);
+    color: var(--black);
+    padding-top: calc(64px + 4rem);
+    padding-bottom: 6rem;
+    min-height: 100vh;
+  }
+
+  .legal-container {
+    max-width: var(--max-width-prose);
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  /* Prose styling */
+  .legal-container :global(h1) {
+    font-size: clamp(2rem, 4vw, 2.5rem);
+    font-weight: 900;
+    color: var(--black);
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.02em;
+  }
+
+  .legal-container :global(h2) {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--black);
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--gray-200);
+  }
+
+  .legal-container :global(h3) {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--black);
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .legal-container :global(p) {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: var(--gray-700);
+    margin-bottom: 1rem;
+  }
+
+  .legal-container :global(ul),
+  .legal-container :global(ol) {
+    margin-bottom: 1rem;
+    padding-left: 1.5rem;
+  }
+
+  .legal-container :global(ul) {
+    list-style: disc;
+  }
+
+  .legal-container :global(ol) {
+    list-style: decimal;
+  }
+
+  .legal-container :global(li) {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: var(--gray-700);
+    margin-bottom: 0.25rem;
+  }
+
+  .legal-container :global(.subtitle) {
+    font-size: 1rem;
+    color: var(--gray-500);
+    margin-bottom: 0.25rem;
+  }
+
+  .legal-container :global(.last-updated) {
+    font-size: 0.875rem;
+    color: var(--gray-500);
+    margin-bottom: 3rem;
+  }
+
+  .legal-container :global(hr) {
+    border: none;
+    border-top: 1px solid var(--gray-200);
+    margin: 2rem 0;
+  }
+
+  .legal-container :global(a) {
+    color: var(--purple);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .legal-container :global(a:hover) {
+    color: var(--purple-dark);
+  }
+
+  .legal-container :global(strong) {
+    font-weight: 600;
+    color: var(--black);
+  }
+
+  .legal-container :global(.note) {
+    font-size: 0.875rem;
+    color: var(--gray-500);
+    font-style: italic;
+  }
+</style>

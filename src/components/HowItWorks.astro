@@ -1,0 +1,134 @@
+---
+---
+
+<section class="how-it-works" id="how-it-works">
+  <div class="container">
+    <div class="section-header">
+      <h2>3つのステップ</h2>
+      <p class="section-sub">シンプルなルールが、予測不能な体験を生む。</p>
+    </div>
+
+    <div class="steps-row">
+      <div class="step-card">
+        <span class="step-number">01</span>
+        <h3 class="step-title">16枚選ぶ</h3>
+        <p class="step-desc">写真ライブラリから16枚を選択。あなたの日常から、さまざまな瞬間を。</p>
+      </div>
+
+      <div class="step-connector" aria-hidden="true">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 12h14M13 6l6 6-6 6" />
+        </svg>
+      </div>
+
+      <div class="step-card">
+        <span class="step-number">02</span>
+        <h3 class="step-title">7枚がランダムに</h3>
+        <p class="step-desc">どの7枚が選ばれるかは、あなたにもわからない。偶然が決める。</p>
+      </div>
+
+      <div class="step-connector" aria-hidden="true">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 12h14M13 6l6 6-6 6" />
+        </svg>
+      </div>
+
+      <div class="step-card">
+        <span class="step-number">03</span>
+        <h3 class="step-title">1日1枚、匿名で届く</h3>
+        <p class="step-desc">毎日1枚、友達のフィードに匿名で現れる。誰の写真かは、秘密。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .how-it-works {
+    background: var(--white);
+    color: var(--black);
+    position: relative;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: clamp(3rem, 6vw, 5rem);
+  }
+
+  .section-header h2 {
+    color: var(--black);
+  }
+
+  .section-sub {
+    margin-top: 1rem;
+    color: var(--gray-500);
+    font-size: clamp(0.95rem, 1.5vw, 1.05rem);
+  }
+
+  .steps-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 0;
+  }
+
+  .step-card {
+    flex: 1;
+    position: relative;
+    padding: clamp(2rem, 3vw, 2.5rem);
+  }
+
+  .step-number {
+    display: block;
+    font-size: clamp(3rem, 5vw, 4.5rem);
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    background: linear-gradient(160deg, var(--purple) 0%, var(--purple-light) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 1.5rem;
+  }
+
+  .step-title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--black);
+    margin-bottom: 0.75rem;
+    letter-spacing: -0.01em;
+  }
+
+  .step-desc {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: var(--gray-500);
+  }
+
+  .step-connector {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    padding-top: 2.5rem;
+    color: var(--gray-300);
+  }
+
+  @media (max-width: 768px) {
+    .steps-row {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .step-connector {
+      padding-top: 0;
+      padding-left: 2rem;
+      transform: rotate(90deg);
+    }
+
+    .step-card {
+      border-left: 2px solid var(--gray-200);
+    }
+
+    .step-card:first-child {
+      border-left-color: var(--purple);
+    }
+  }
+</style>

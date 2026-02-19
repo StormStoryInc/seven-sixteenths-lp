@@ -1,0 +1,129 @@
+---
+---
+
+<section class="features" id="features">
+  <div class="container">
+    <div class="section-header">
+      <h2>なぜ 7/16 なのか</h2>
+      <p class="section-sub">偶然と匿名が生む、新しいつながりの形。</p>
+    </div>
+
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon-wrap">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10Z" />
+            <path d="M2 21a10 10 0 0 1 20 0" opacity="0.5" />
+            <path d="M15 9l6 6M21 9l-6 6" />
+          </svg>
+        </div>
+        <h3 class="feature-title">匿名性</h3>
+        <p class="feature-desc">投稿者がわからない。リアクションした瞬間、あなたの正体が明かされる。</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon-wrap">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M16 3h5v5M4 20L21 3" />
+            <path d="M21 16v5h-5M15 15l6 6" />
+            <path d="M4 4l5 5" />
+          </svg>
+        </div>
+        <h3 class="feature-title">偶然性</h3>
+        <p class="feature-desc">16枚から7枚をランダム抽出。何が共有されるかは運命次第。</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon-wrap">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10" />
+            <polyline points="12 6 12 12 16 14" />
+          </svg>
+        </div>
+        <h3 class="feature-title">7日間のリチュアル</h3>
+        <p class="feature-desc">1日1枚。毎日のサプライズが友達との新しい会話を生む。</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon-wrap">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+          </svg>
+        </div>
+        <h3 class="feature-title">プライベート</h3>
+        <p class="feature-desc">友達限定の空間。知らない人には届かない、安心の写真共有。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .features {
+    background: var(--gray-950);
+    position: relative;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: clamp(3rem, 6vw, 5rem);
+  }
+
+  .section-sub {
+    margin-top: 1rem;
+    color: var(--gray-500);
+    font-size: clamp(0.95rem, 1.5vw, 1.05rem);
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 24px;
+    overflow: hidden;
+  }
+
+  .feature-card {
+    padding: clamp(2rem, 4vw, 3rem);
+    background: var(--gray-950);
+    transition: background 0.4s;
+  }
+
+  .feature-card:hover {
+    background: rgba(255, 255, 255, 0.03);
+  }
+
+  .feature-icon-wrap {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    background: rgba(139, 92, 246, 0.1);
+    border: 1px solid rgba(139, 92, 246, 0.15);
+    color: var(--purple-light);
+  }
+
+  .feature-title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--white);
+    margin-bottom: 0.75rem;
+    letter-spacing: -0.01em;
+  }
+
+  .feature-desc {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: var(--gray-400);
+  }
+
+  @media (max-width: 768px) {
+    .features-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
