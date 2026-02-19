@@ -2,24 +2,37 @@
 ---
 
 <section class="cta" id="cta">
-  <div class="cta-glow" aria-hidden="true"></div>
+  <!-- Multi-layer gradient backdrop -->
+  <div class="cta-backdrop" aria-hidden="true">
+    <div class="cta-orb cta-orb-1"></div>
+    <div class="cta-orb cta-orb-2"></div>
+  </div>
+  <div class="cta-noise" aria-hidden="true"></div>
+
   <div class="container cta-inner">
-    <img src="/app-icon.png" alt="7/16 App Icon" class="cta-icon" width="72" height="72" />
-    <h2 class="cta-title">まもなく登場</h2>
-    <p class="cta-desc">
+    <div class="reveal">
+      <div class="cta-icon-wrap">
+        <img src="/app-icon.png" alt="7/16" class="cta-icon" width="64" height="64" />
+      </div>
+    </div>
+
+    <h2 class="cta-title reveal" style="--i: 1;">まもなく登場</h2>
+
+    <p class="cta-desc reveal" style="--i: 2;">
       あなたの写真が、予想もしない形で友達に届く。<br />
-      7/16で、偶然の共有を体験しよう。
+      偶然の共有を、体験しよう。
     </p>
-    <div class="cta-badges">
+
+    <div class="cta-badges reveal" style="--i: 3;">
       <div class="store-badge">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
         <div>
           <span class="store-label">App Store</span>
           <span class="store-status">Coming Soon</span>
         </div>
       </div>
       <div class="store-badge">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 2.302-2.302 2.302-2.78-2.302 2.78-2.302zM5.864 2.658L16.8 9.009l-2.302 2.302L5.864 2.658z"/></svg>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 2.302-2.302 2.302-2.78-2.302 2.78-2.302zM5.864 2.658L16.8 9.009l-2.302 2.302L5.864 2.658z"/></svg>
         <div>
           <span class="store-label">Google Play</span>
           <span class="store-status">Coming Soon</span>
@@ -36,14 +49,44 @@
     overflow: hidden;
   }
 
-  .cta-glow {
+  .cta-backdrop {
     position: absolute;
+    inset: 0;
+    overflow: hidden;
+  }
+
+  .cta-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(100px);
+    pointer-events: none;
+  }
+
+  .cta-orb-1 {
+    width: 500px;
+    height: 500px;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 800px;
-    height: 500px;
-    background: radial-gradient(ellipse, rgba(139, 92, 246, 0.12), transparent 70%);
+    background: radial-gradient(circle, rgba(139, 92, 246, 0.12), transparent 70%);
+  }
+
+  .cta-orb-2 {
+    width: 300px;
+    height: 300px;
+    top: 30%;
+    left: 60%;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle, rgba(99, 102, 241, 0.06), transparent 70%);
+    animation: orbFloat 15s linear infinite reverse;
+  }
+
+  .cta-noise {
+    position: absolute;
+    inset: 0;
+    opacity: 0.02;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 256px 256px;
     pointer-events: none;
   }
 
@@ -56,26 +99,50 @@
     align-items: center;
   }
 
-  .cta-icon {
-    width: 72px;
-    height: 72px;
-    border-radius: 18px;
+  .cta-icon-wrap {
+    position: relative;
     margin-bottom: 2.5rem;
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
+  }
+
+  .cta-icon-wrap::after {
+    content: '';
+    position: absolute;
+    inset: -6px;
+    border-radius: 22px;
+    background: conic-gradient(
+      from var(--gradient-angle),
+      rgba(139, 92, 246, 0.4),
+      transparent,
+      rgba(139, 92, 246, 0.1),
+      transparent,
+      rgba(139, 92, 246, 0.4)
+    );
+    animation: gradientRotate 4s linear infinite;
+    z-index: -1;
+    filter: blur(4px);
+  }
+
+  .cta-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 16px;
+    position: relative;
+    z-index: 1;
   }
 
   .cta-title {
-    font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
     font-weight: 800;
     margin-bottom: 1rem;
     color: var(--white);
+    letter-spacing: -0.02em;
   }
 
   .cta-desc {
-    font-size: clamp(0.9rem, 1.3vw, 1rem);
+    font-size: clamp(0.85rem, 1.2vw, 0.95rem);
     color: var(--gray-500);
-    line-height: 1.8;
-    max-width: 400px;
+    line-height: 1.9;
+    max-width: 360px;
     margin-bottom: 2.5rem;
   }
 
@@ -89,24 +156,24 @@
   .store-badge {
     display: flex;
     align-items: center;
-    gap: 0.6rem;
-    padding: 0.6rem 1.2rem;
-    border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    background: rgba(255, 255, 255, 0.03);
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    background: rgba(255, 255, 255, 0.02);
     color: var(--white);
-    transition: border-color 0.3s, background 0.3s;
+    transition: border-color 0.4s, background 0.4s;
     cursor: default;
   }
 
   .store-badge:hover {
-    border-color: rgba(255, 255, 255, 0.15);
-    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(139, 92, 246, 0.25);
+    background: rgba(139, 92, 246, 0.05);
   }
 
   .store-badge svg {
     flex-shrink: 0;
-    opacity: 0.5;
+    opacity: 0.4;
   }
 
   .store-badge div {
@@ -117,12 +184,12 @@
   }
 
   .store-label {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     font-weight: 600;
   }
 
   .store-status {
-    font-size: 0.65rem;
+    font-size: 0.6rem;
     color: var(--gray-600);
     font-weight: 500;
     letter-spacing: 0.04em;

@@ -2,6 +2,12 @@
    7/16 Landing Page — Global Styles
    =================================================================== */
 
+@property --gradient-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
 :root {
   --black: #000000;
   --white: #ffffff;
@@ -23,10 +29,12 @@
   --purple-glow: rgba(139, 92, 246, 0.25);
 
   --font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  --max-width: 1200px;
+  --max-width: 1100px;
   --max-width-prose: 720px;
 
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 /* Reset */
@@ -69,16 +77,15 @@ ul, ol {
 /* Typography */
 h1, h2, h3, h4 {
   line-height: 1.1;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.03em;
   font-weight: 700;
 }
 
-h1 { font-size: clamp(2.5rem, 5vw, 4rem); }
-h2 { font-size: clamp(2rem, 4vw, 3rem); }
-h3 { font-size: clamp(1.25rem, 2.5vw, 1.5rem); }
+h2 { font-size: clamp(1.75rem, 3.5vw, 2.75rem); }
+h3 { font-size: clamp(1.125rem, 2vw, 1.35rem); }
 
 p {
-  font-size: clamp(1rem, 1.5vw, 1.125rem);
+  font-size: clamp(0.9rem, 1.3vw, 1rem);
   color: var(--gray-400);
 }
 
@@ -102,55 +109,116 @@ p {
   border-width: 0;
 }
 
-/* Animations */
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(30px); }
+/* ---- Hero entrance animations ---- */
+@keyframes heroFadeUp {
+  from { opacity: 0; transform: translateY(24px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
-@keyframes fadeIn {
+@keyframes heroScale {
+  from { opacity: 0; transform: scale(0.92); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes heroFade {
   from { opacity: 0; }
   to { opacity: 1; }
 }
 
-@keyframes scaleIn {
-  from { opacity: 0; transform: scale(0.8); }
-  to { opacity: 1; transform: scale(1); }
+@keyframes drift {
+  0%, 100% { transform: translateX(-50%) translateY(0); opacity: 0.4; }
+  50% { transform: translateX(-50%) translateY(6px); opacity: 0.8; }
 }
 
-@keyframes bounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(8px); }
+@keyframes pulse {
+  0%, 100% { opacity: 1; box-shadow: 0 0 6px var(--purple); }
+  50% { opacity: 0.4; box-shadow: 0 0 14px var(--purple); }
 }
 
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-8px); }
+@keyframes orbFloat {
+  0% { transform: translate(-50%, -50%) rotate(0deg); }
+  100% { transform: translate(-50%, -50%) rotate(360deg); }
 }
 
-.animate-fade-in-up {
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes gradientRotate {
+  0% { --gradient-angle: 0deg; }
+  100% { --gradient-angle: 360deg; }
+}
+
+.hero-entrance {
   opacity: 0;
-  animation: fadeInUp 0.8s var(--ease-out-expo) forwards;
 }
 
-.animate-fade-in {
+.hero-entrance.e-fade-up { animation: heroFadeUp 0.9s var(--ease-out-expo) forwards; }
+.hero-entrance.e-scale { animation: heroScale 1.1s var(--ease-out-expo) forwards; }
+.hero-entrance.e-fade { animation: heroFade 0.8s var(--ease-out-expo) forwards; }
+
+.d1 { animation-delay: 0.1s; }
+.d2 { animation-delay: 0.25s; }
+.d3 { animation-delay: 0.5s; }
+.d4 { animation-delay: 0.65s; }
+.d5 { animation-delay: 0.8s; }
+.d6 { animation-delay: 0.95s; }
+.d7 { animation-delay: 1.1s; }
+.d8 { animation-delay: 1.4s; }
+
+/* ---- Scroll-reveal system ---- */
+.reveal {
   opacity: 0;
-  animation: fadeIn 0.8s var(--ease-out-expo) forwards;
+  transform: translateY(32px);
+  transition: opacity 0.8s var(--ease-out-expo), transform 0.8s var(--ease-out-expo);
 }
 
-.animate-scale-in {
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-scale {
   opacity: 0;
-  animation: scaleIn 1s var(--ease-out-expo) forwards;
+  transform: scale(0.96);
+  transition: opacity 0.8s var(--ease-out-expo), transform 0.8s var(--ease-out-expo);
 }
 
-.delay-1 { animation-delay: 0.15s; }
-.delay-2 { animation-delay: 0.3s; }
-.delay-3 { animation-delay: 0.45s; }
-.delay-4 { animation-delay: 0.6s; }
-.delay-5 { animation-delay: 0.75s; }
-.delay-6 { animation-delay: 0.9s; }
-.delay-7 { animation-delay: 1.05s; }
-.delay-8 { animation-delay: 1.2s; }
+.reveal-scale.is-visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* stagger children */
+.stagger-children .reveal {
+  transition-delay: calc(var(--i, 0) * 0.12s);
+}
+
+/* Sections */
+section {
+  padding: clamp(5rem, 12vw, 10rem) 0;
+  position: relative;
+}
+
+/* Section transition gradients */
+.section-fade-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 120px;
+  pointer-events: none;
+}
+
+.section-fade-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 120px;
+  pointer-events: none;
+}
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
@@ -158,9 +226,14 @@ p {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
-}
 
-/* Sections */
-section {
-  padding: clamp(5rem, 12vw, 10rem) 0;
+  .reveal, .reveal-scale {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .hero-entrance {
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }
