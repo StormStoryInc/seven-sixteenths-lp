@@ -16,7 +16,7 @@
       </div>
     </div>
 
-    <h2 class="cta-title reveal" style="--i: 1;">まもなく登場</h2>
+    <h2 class="cta-title reveal" style="--i: 1;">今すぐダウンロード</h2>
 
     <p class="cta-desc reveal" style="--i: 2;">
       あなたの写真が、予想もしない形で友達に届く。<br />
@@ -24,20 +24,12 @@
     </p>
 
     <div class="cta-badges reveal" style="--i: 3;">
-      <div class="store-badge">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-        <div>
-          <span class="store-label">App Store</span>
-          <span class="store-status">Coming Soon</span>
-        </div>
-      </div>
-      <div class="store-badge">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 2.302-2.302 2.302-2.78-2.302 2.78-2.302zM5.864 2.658L16.8 9.009l-2.302 2.302L5.864 2.658z"/></svg>
-        <div>
-          <span class="store-label">Google Play</span>
-          <span class="store-status">Coming Soon</span>
-        </div>
-      </div>
+      <a href="https://apps.apple.com/jp/app/7-16/id6759083490" class="store-badge-link" target="_blank" rel="noopener noreferrer">
+        <img src="/badges/app-store.svg" alt="Download on the App Store" height="40" />
+      </a>
+      <a href="https://play.google.com/store/apps/details?id=net.stormstory.sevensixteenths" class="store-badge-link" target="_blank" rel="noopener noreferrer">
+        <img src="/badges/google-play.svg" alt="Get it on Google Play" height="40" />
+      </a>
     </div>
   </div>
 </section>
@@ -68,7 +60,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: radial-gradient(circle, rgba(139, 92, 246, 0.12), transparent 70%);
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.05), transparent 70%);
   }
 
   .cta-orb-2 {
@@ -77,7 +69,7 @@
     top: 30%;
     left: 60%;
     transform: translate(-50%, -50%);
-    background: radial-gradient(circle, rgba(99, 102, 241, 0.06), transparent 70%);
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.03), transparent 70%);
     animation: orbFloat 15s linear infinite reverse;
   }
 
@@ -111,11 +103,11 @@
     border-radius: 22px;
     background: conic-gradient(
       from var(--gradient-angle),
-      rgba(139, 92, 246, 0.4),
+      rgba(255, 255, 255, 0.2),
       transparent,
-      rgba(139, 92, 246, 0.1),
+      rgba(255, 255, 255, 0.05),
       transparent,
-      rgba(139, 92, 246, 0.4)
+      rgba(255, 255, 255, 0.2)
     );
     animation: gradientRotate 4s linear infinite;
     z-index: -1;
@@ -153,46 +145,20 @@
     justify-content: center;
   }
 
-  .store-badge {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.5rem 1rem;
-    border-radius: 10px;
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    background: rgba(255, 255, 255, 0.02);
-    color: var(--white);
-    transition: border-color 0.4s, background 0.4s;
-    cursor: default;
+  .store-badge-link {
+    display: block;
+    transition: opacity 0.3s, transform 0.3s;
   }
 
-  .store-badge:hover {
-    border-color: rgba(139, 92, 246, 0.25);
-    background: rgba(139, 92, 246, 0.05);
+  .store-badge-link:hover {
+    opacity: 0.85;
+    transform: scale(1.03);
   }
 
-  .store-badge svg {
-    flex-shrink: 0;
-    opacity: 0.4;
-  }
-
-  .store-badge div {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    line-height: 1.2;
-  }
-
-  .store-label {
-    font-size: 0.8rem;
-    font-weight: 600;
-  }
-
-  .store-status {
-    font-size: 0.6rem;
-    color: var(--gray-600);
-    font-weight: 500;
-    letter-spacing: 0.04em;
+  .store-badge-link img {
+    height: 40px;
+    width: auto;
+    display: block;
   }
 
   @media (max-width: 768px) {
