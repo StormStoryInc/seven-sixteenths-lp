@@ -5,14 +5,15 @@ import { SITE_TITLE } from '../consts';
 const APP_STORE_URL = 'https://apps.apple.com/app/id6759083490';
 const PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=net.stormstory.sevensixteenths';
 
-const title = `${SITE_TITLE} をダウンロード`;
-const description = '7/16 — 思い出を、撮って終わりにしない。16枚から7枚をランダムに選び、1日1枚、友達に届く写真共有アプリ。';
+const title = `Download ${SITE_TITLE} — Share 7 random memories from 16 photos`;
+const description = '7/16 picks 7 of your 16 photos at random and shares one each day with friends — anonymously. Free on iOS & Android.';
+const ogImage = '/og-download.png';
 ---
 
 <!doctype html>
-<html lang="ja">
+<html lang="en">
 	<head>
-		<BaseHead title={title} description={description} />
+		<BaseHead title={title} description={description} image={ogImage} />
 		<!--
 			Smart redirect: detect platform via User-Agent and redirect immediately.
 			Falls through to a manual page with both store badges if JS is disabled
@@ -36,11 +37,11 @@ const description = '7/16 — 思い出を、撮って終わりにしない。16
 				<img src="/app-icon.png" alt="7/16" class="download-icon" width="80" height="80" />
 
 				<h1 class="download-title">7/16</h1>
-				<p class="download-tagline">思い出を、撮って終わりにしない。</p>
+				<p class="download-tagline">Don't let memories end at the shutter.</p>
 
 				<p class="download-desc">
-					16枚の写真からランダムに7枚が選ばれ、<br />
-					1日1枚、友達に匿名で届く。
+					7 of your 16 photos are chosen at random<br />
+					and shared with friends — one each day, anonymously.
 				</p>
 
 				<div class="download-badges">
