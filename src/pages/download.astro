@@ -1,31 +1,48 @@
 ---
-export const prerender = false;
-
 import BaseHead from '../components/BaseHead.astro';
-import { SITE_TITLE } from '../consts';
-import { t, type Locale } from '../i18n';
+import { t } from '../i18n';
 
-// Detect locale from Accept-Language header (server-side)
-const acceptLang = Astro.request.headers.get('accept-language') ?? '';
-const locale: Locale = acceptLang.match(/^ja/i) || acceptLang.includes('ja') ? 'ja' : 'en';
-const tr = t(locale);
+const en = t('en');
+const ja = t('ja');
 
 const APP_STORE_URL = 'https://apps.apple.com/app/id6759083490';
 const PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=net.stormstory.sevensixteenths';
 ---
 
 <!doctype html>
-<html lang={tr.lang}>
+<html lang="en">
 	<head>
-		<BaseHead title={tr.downloadTitle} description={tr.downloadDescription} image="/og-download.png" />
+		<BaseHead title={en.downloadTitle} description={en.downloadDescription} image="/og-download.png" />
+		<!--
+			1. Mobile → instant store redirect (JS, client-side UA detection)
+			2. Desktop → show download page, language auto-detected via navigator.language
+			   Both en/ja text is in the DOM; JS shows the right one instantly (no flash).
+		-->
 		<script is:inline define:vars={{ APP_STORE_URL, PLAY_STORE_URL }}>
 			(function () {
 				var ua = navigator.userAgent || navigator.vendor || '';
+				// Mobile → redirect to store
 				if (/iPhone|iPad|iPod/i.test(ua)) {
 					window.location.replace(APP_STORE_URL);
-				} else if (/Android/i.test(ua)) {
-					window.location.replace(PLAY_STORE_URL);
+					return;
 				}
+				if (/Android/i.test(ua)) {
+					window.location.replace(PLAY_STORE_URL);
+					return;
+				}
+				// Desktop → detect language and show correct text
+				var isJa = /^ja\b/i.test(navigator.language || '');
+				document.documentElement.lang = isJa ? 'ja' : 'en';
+				document.addEventListener('DOMContentLoaded', function () {
+					var show = isJa ? 'ja' : 'en';
+					var hide = isJa ? 'en' : 'ja';
+					document.querySelectorAll('[data-lang="' + show + '"]').forEach(function (el) {
+						el.style.display = '';
+					});
+					document.querySelectorAll('[data-lang="' + hide + '"]').forEach(function (el) {
+						el.style.display = 'none';
+					});
+				});
 			})();
 		</script>
 	</head>
@@ -34,8 +51,13 @@ const PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=net.storms
 			<div class="download-card">
 				<img src="/app-icon.png" alt="7/16" class="download-icon" width="80" height="80" />
 				<h1 class="download-title">7/16</h1>
-				<p class="download-tagline">{tr.downloadTagline}</p>
-				<p class="download-desc">{tr.downloadDesc}<br />{tr.downloadDesc2}</p>
+
+				<p class="download-tagline" data-lang="en">{en.downloadTagline}</p>
+				<p class="download-tagline" data-lang="ja" style="display:none">{ja.downloadTagline}</p>
+
+				<p class="download-desc" data-lang="en">{en.downloadDesc}<br />{en.downloadDesc2}</p>
+				<p class="download-desc" data-lang="ja" style="display:none">{ja.downloadDesc}<br />{ja.downloadDesc2}</p>
+
 				<div class="download-badges">
 					<a href={APP_STORE_URL} class="store-badge-link" target="_blank" rel="noopener noreferrer">
 						<img src="/badges/app-store.svg" alt="Download on the App Store" height="48" />
