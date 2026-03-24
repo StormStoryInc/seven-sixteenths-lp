@@ -1,5 +1,15 @@
 ---
 import { CONTACT_EMAIL } from '../consts';
+import type { Translations, Locale } from '../i18n';
+import { prefix } from '../i18n';
+
+interface Props {
+  t: Translations;
+  locale: Locale;
+}
+
+const { t, locale } = Astro.props;
+const p = prefix(locale);
 const year = new Date().getFullYear();
 ---
 
@@ -7,14 +17,14 @@ const year = new Date().getFullYear();
   <div class="container footer-inner">
     <div class="footer-brand">
       <span class="footer-logo">7/16</span>
-      <p class="footer-tagline">瞬間をシェア。匿名のまま。</p>
+      <p class="footer-tagline">{t.footerTagline}</p>
     </div>
 
     <div class="footer-links">
-      <a href="/terms">利用規約</a>
-      <a href="/privacy">プライバシーポリシー</a>
-      <a href="/child-safety">子どもの安全</a>
-      <a href={`mailto:${CONTACT_EMAIL}`}>お問い合わせ</a>
+      <a href={`${p}/terms`}>{t.footerTerms}</a>
+      <a href={`${p}/privacy`}>{t.footerPrivacy}</a>
+      <a href={`${p}/child-safety`}>{t.footerChildSafety}</a>
+      <a href={`mailto:${CONTACT_EMAIL}`}>{t.footerContact}</a>
     </div>
 
     <div class="footer-bottom">

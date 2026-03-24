@@ -1,10 +1,14 @@
 ---
+import type { Translations } from '../i18n';
+
+interface Props { t: Translations; }
+const { t } = Astro.props;
 ---
 
 <section class="features" id="features">
   <div class="container">
     <div class="section-header reveal">
-      <h2>なぜ 7/16 なのか</h2>
+      <h2>{t.featuresTitle}</h2>
     </div>
 
     <div class="features-grid stagger-children">
@@ -18,8 +22,8 @@
               <line x1="1" y1="1" x2="23" y2="23" />
             </svg>
           </div>
-          <h3 class="feature-title">匿名性</h3>
-          <p class="feature-desc">投稿者がわからない。リアクションした瞬間、あなたの正体が明かされる。</p>
+          <h3 class="feature-title">{t.featureAnonymityTitle}</h3>
+          <p class="feature-desc">{t.featureAnonymityDesc}</p>
         </div>
       </div>
 
@@ -35,8 +39,8 @@
               <line x1="4" y1="4" x2="9" y2="9" />
             </svg>
           </div>
-          <h3 class="feature-title">偶然性</h3>
-          <p class="feature-desc">16枚から7枚をランダム抽出。何が共有されるかは運命次第。</p>
+          <h3 class="feature-title">{t.featureChanceTitle}</h3>
+          <p class="feature-desc">{t.featureChanceDesc}</p>
         </div>
       </div>
 
@@ -49,8 +53,8 @@
               <polyline points="12 6 12 12 16 14" />
             </svg>
           </div>
-          <h3 class="feature-title">7日間のリチュアル</h3>
-          <p class="feature-desc">1日1枚。毎日のサプライズが友達との新しい会話を生む。</p>
+          <h3 class="feature-title">{t.featureRitualTitle}</h3>
+          <p class="feature-desc">{t.featureRitualDesc}</p>
         </div>
       </div>
 
@@ -62,8 +66,8 @@
               <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
             </svg>
           </div>
-          <h3 class="feature-title">プライベート</h3>
-          <p class="feature-desc">友達限定の空間。知らない人には届かない、安心の写真共有。</p>
+          <h3 class="feature-title">{t.featurePrivateTitle}</h3>
+          <p class="feature-desc">{t.featurePrivateDesc}</p>
         </div>
       </div>
     </div>
@@ -88,7 +92,6 @@
     gap: 1rem;
   }
 
-  /* Card with animated gradient border */
   .feature-card {
     position: relative;
     border-radius: 20px;

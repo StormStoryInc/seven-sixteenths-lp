@@ -2,28 +2,32 @@
 import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import { t as getT, type Locale } from '../i18n';
 
 interface Props {
   title: string;
   description: string;
+  locale?: Locale;
 }
 
-const { title, description } = Astro.props;
+const { title, description, locale = 'ja' } = Astro.props;
+const tr = getT(locale);
+const altLocale: Locale = locale === 'en' ? 'ja' : 'en';
 ---
 
 <!doctype html>
-<html lang="ja">
+<html lang={tr.lang}>
   <head>
     <BaseHead title={`${title} — 7/16`} description={description} />
   </head>
   <body>
-    <Header />
+    <Header t={tr} locale={locale} altLocale={altLocale} />
     <main class="legal">
       <div class="legal-container">
         <slot />
       </div>
     </main>
-    <Footer />
+    <Footer t={tr} locale={locale} />
   </body>
 </html>
 
@@ -42,7 +46,6 @@ const { title, description } = Astro.props;
     padding: 0 1.5rem;
   }
 
-  /* Prose styling */
   .legal-container :global(h1) {
     font-size: clamp(2rem, 4vw, 2.5rem);
     font-weight: 900;

@@ -1,18 +1,17 @@
 ---
+import type { Translations } from '../i18n';
+
+interface Props { t: Translations; }
+const { t } = Astro.props;
 ---
 
 <section class="hero" id="hero">
-  <!-- Animated gradient orbs -->
   <div class="hero-orbs" aria-hidden="true">
     <div class="orb orb-1"></div>
     <div class="orb orb-2"></div>
     <div class="orb orb-3"></div>
   </div>
-
-  <!-- Dot grid -->
   <div class="hero-grid" aria-hidden="true"></div>
-
-  <!-- Noise texture -->
   <div class="hero-noise" aria-hidden="true"></div>
 
   <div class="hero-content">
@@ -20,13 +19,15 @@
       <span class="title-7">7</span><span class="title-slash">/</span><span class="title-16">16</span>
     </h1>
 
-    <p class="hero-tagline hero-entrance e-fade-up d2">思い出を、撮って終わりにしない。</p>
-    <p class="hero-tagline-en hero-entrance e-fade-up d3">Don't let memories end at the shutter.</p>
+    <p class="hero-tagline hero-entrance e-fade-up d2">{t.heroTagline}</p>
+    {t.heroTaglineSub && (
+      <p class="hero-tagline-en hero-entrance e-fade-up d3">{t.heroTaglineSub}</p>
+    )}
 
     <div class="hero-divider hero-entrance e-fade d4"></div>
 
     <p class="hero-desc hero-entrance e-fade-up d5">
-      あなたの写真から7枚をランダムに選び、<br />1日1枚、匿名で友達に届けます。
+      {t.heroDescBr}<br />{t.heroDescBr2}
     </p>
   </div>
 
@@ -48,7 +49,6 @@
     background: var(--black);
   }
 
-  /* Animated gradient orbs */
   .hero-orbs {
     position: absolute;
     inset: 0;
@@ -90,7 +90,6 @@
     animation: orbFloat 30s linear infinite;
   }
 
-  /* Dot grid */
   .hero-grid {
     position: absolute;
     inset: 0;
@@ -101,7 +100,6 @@
     -webkit-mask-image: radial-gradient(ellipse 45% 45% at 50% 50%, black 0%, transparent 70%);
   }
 
-  /* Noise */
   .hero-noise {
     position: absolute;
     inset: 0;
@@ -118,7 +116,6 @@
     z-index: 1;
   }
 
-  /* Title */
   .hero-title {
     font-size: clamp(7rem, 20vw, 16rem);
     font-weight: 900;
@@ -175,7 +172,6 @@
     margin: 0 auto;
   }
 
-  /* Scroll indicator — animated line */
   .scroll-indicator {
     position: absolute;
     bottom: 2.5rem;

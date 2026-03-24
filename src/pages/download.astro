@@ -1,24 +1,23 @@
 ---
+export const prerender = false;
+
 import BaseHead from '../components/BaseHead.astro';
 import { SITE_TITLE } from '../consts';
+import { t, type Locale } from '../i18n';
+
+// Detect locale from Accept-Language header (server-side)
+const acceptLang = Astro.request.headers.get('accept-language') ?? '';
+const locale: Locale = acceptLang.match(/^ja/i) || acceptLang.includes('ja') ? 'ja' : 'en';
+const tr = t(locale);
 
 const APP_STORE_URL = 'https://apps.apple.com/app/id6759083490';
 const PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=net.stormstory.sevensixteenths';
-
-const title = `Download ${SITE_TITLE} — Share 7 random memories from 16 photos`;
-const description = '7/16 picks 7 of your 16 photos at random and shares one each day with friends — anonymously. Free on iOS & Android.';
-const ogImage = '/og-download.png';
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={tr.lang}>
 	<head>
-		<BaseHead title={title} description={description} image={ogImage} />
-		<!--
-			Smart redirect: detect platform via User-Agent and redirect immediately.
-			Falls through to a manual page with both store badges if JS is disabled
-			or the platform is unrecognised (e.g. desktop).
-		-->
+		<BaseHead title={tr.downloadTitle} description={tr.downloadDescription} image="/og-download.png" />
 		<script is:inline define:vars={{ APP_STORE_URL, PLAY_STORE_URL }}>
 			(function () {
 				var ua = navigator.userAgent || navigator.vendor || '';
@@ -27,7 +26,6 @@ const ogImage = '/og-download.png';
 				} else if (/Android/i.test(ua)) {
 					window.location.replace(PLAY_STORE_URL);
 				}
-				// Desktop / unknown → fall through to the page below
 			})();
 		</script>
 	</head>
@@ -35,15 +33,9 @@ const ogImage = '/og-download.png';
 		<main class="download-page">
 			<div class="download-card">
 				<img src="/app-icon.png" alt="7/16" class="download-icon" width="80" height="80" />
-
 				<h1 class="download-title">7/16</h1>
-				<p class="download-tagline">Don't let memories end at the shutter.</p>
-
-				<p class="download-desc">
-					7 of your 16 photos are chosen at random<br />
-					and shared with friends — one each day, anonymously.
-				</p>
-
+				<p class="download-tagline">{tr.downloadTagline}</p>
+				<p class="download-desc">{tr.downloadDesc}<br />{tr.downloadDesc2}</p>
 				<div class="download-badges">
 					<a href={APP_STORE_URL} class="store-badge-link" target="_blank" rel="noopener noreferrer">
 						<img src="/badges/app-store.svg" alt="Download on the App Store" height="48" />
@@ -64,20 +56,17 @@ const ogImage = '/og-download.png';
 				padding: 2rem;
 				background: var(--black);
 			}
-
 			.download-card {
 				text-align: center;
 				max-width: 380px;
 				animation: fadeUp 0.6s var(--ease-out-expo) both;
 			}
-
 			.download-icon {
 				width: 80px;
 				height: 80px;
 				border-radius: 20px;
 				margin: 0 auto 1.5rem;
 			}
-
 			.download-title {
 				font-size: 2rem;
 				font-weight: 900;
@@ -85,58 +74,42 @@ const ogImage = '/og-download.png';
 				margin-bottom: 0.5rem;
 				color: var(--white);
 			}
-
 			.download-tagline {
 				font-size: 1rem;
 				color: var(--gray-400);
 				margin-bottom: 1.5rem;
 			}
-
 			.download-desc {
 				font-size: 0.9rem;
 				color: var(--gray-500);
 				line-height: 1.8;
 				margin-bottom: 2.5rem;
 			}
-
 			.download-badges {
 				display: flex;
 				gap: 0.75rem;
 				justify-content: center;
 				flex-wrap: wrap;
 			}
-
 			.store-badge-link {
 				display: block;
 				transition: opacity 0.3s, transform 0.3s;
 			}
-
 			.store-badge-link:hover {
 				opacity: 0.85;
 				transform: scale(1.03);
 			}
-
 			.store-badge-link img {
 				height: 48px;
 				width: auto;
 				display: block;
 			}
-
 			@keyframes fadeUp {
-				from {
-					opacity: 0;
-					transform: translateY(16px);
-				}
-				to {
-					opacity: 1;
-					transform: translateY(0);
-				}
+				from { opacity: 0; transform: translateY(16px); }
+				to { opacity: 1; transform: translateY(0); }
 			}
-
 			@media (max-width: 480px) {
-				.download-desc br {
-					display: none;
-				}
+				.download-desc br { display: none; }
 			}
 		</style>
 	</body>
